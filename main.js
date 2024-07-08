@@ -27,7 +27,7 @@ scene.add(camera)
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
-    alpha: true,
+    // alpha: true,
     canvas: canvas
 })
 renderer.setSize(sizes.width, sizes.height)
