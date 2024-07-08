@@ -3,6 +3,8 @@ body {
   min-height: 100%;
   margin: 0;
   padding: 0;
+  background: rgb(254,254,254);
+  background: linear-gradient(125deg, rgba(254,254,254,1) 0%, rgba(161,161,161,1) 100%);
 }
 
 canvas {
