@@ -1,3 +1,4 @@
+import './style.css'
 import * as THREE from 'three'
 
 // Canvas
@@ -14,13 +15,14 @@ scene.add(mesh)
 
 // Sizes
 const sizes = {
-    width: 800,
-    height: 600
+    width: window.innerWidth,
+    height: window.innerHeight
 }
 
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 3
+
 scene.add(camera)
 
 // Renderer
@@ -29,3 +31,10 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
+
+// window.addEventListener('resize', () => {
+//     console.log('window resize')
+//     camera.aspect = window.innerWidth / window.innerHeight;
+//     camera.updateProjectionMatrix();
+//     renderer.setSize(window.innerWidth, window.innerHeight);
+// }, false)
