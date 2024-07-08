@@ -1,5 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import GUI from 'lil-gui'
 
 // Debug
@@ -58,11 +59,15 @@ const sizes = {
 // Camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height)
 camera.position.z = 5
-camera.position.y = 3
-camera.position.x = 3
-camera.lookAt(group.position)
+// camera.position.y = 3
+// camera.position.x = 3
+// camera.lookAt(group.position)
 
 scene.add(camera)
+
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
 
 // Renderer
 const renderer = new THREE.WebGLRenderer({
