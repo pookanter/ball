@@ -6,6 +6,11 @@ import GUI from "lil-gui";
 // Debug
 const gui = new GUI();
 
+// Textures
+const textureLoader = new THREE.TextureLoader();
+const marbleTexture = textureLoader.load("/public/textures/white-marble.jpg");
+const brownWoodTexture = textureLoader.load("/public/textures/brown-wood.jpg");
+
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
 
@@ -23,7 +28,7 @@ groupTweak.add(group.position, "z").min(-3).max(3).step(0.01).name("z");
 
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 32, 16),
-  new THREE.MeshBasicMaterial({ color: 0xff0000 })
+  new THREE.MeshBasicMaterial({ map: marbleTexture })
 );
 group.add(sphere);
 sphere.position.y = 0.75;
@@ -36,7 +41,7 @@ sphereTweak.addColor(sphere.material, "color").name("color");
 
 const box = new THREE.Mesh(
   new THREE.BoxGeometry(2, 0.4, 2),
-  new THREE.MeshBasicMaterial({ color: 0x000fff3b })
+  new THREE.MeshBasicMaterial({ map: brownWoodTexture })
 );
 group.add(box);
 
