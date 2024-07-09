@@ -24,6 +24,12 @@ const scene = new THREE.Scene();
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
+const pointLight = new THREE.PointLight(0xffffff, 0.5);
+pointLight.position.x = 2;
+pointLight.position.y = 3;
+pointLight.position.z = 4;
+scene.add(pointLight);
+
 // Objects
 const group = new THREE.Group();
 scene.add(group);
@@ -33,9 +39,11 @@ groupTweak.add(group.position, "x").min(-3).max(3).step(0.01).name("x");
 groupTweak.add(group.position, "y").min(-3).max(3).step(0.01).name("y");
 groupTweak.add(group.position, "z").min(-3).max(3).step(0.01).name("z");
 
+const sphereMat = new THREE.MeshStandardMaterial({ map: marbleTexture, color: 0xffffff, metalness: 0.65 , roughness: 0.45 });
+
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 32, 16),
-  new THREE.MeshBasicMaterial({ map: marbleTexture })
+  sphereMat
 );
 group.add(sphere);
 sphere.position.y = 0.75;
@@ -45,6 +53,8 @@ sphereTweak.add(sphere.position, "x").min(-3).max(3).step(0.01).name("x");
 sphereTweak.add(sphere.position, "y").min(-3).max(3).step(0.01).name("y");
 sphereTweak.add(sphere.position, "z").min(-3).max(3).step(0.01).name("z");
 sphereTweak.addColor(sphere.material, "color").name("color");
+sphereTweak.add(sphere.material, "metalness").min(0).max(1).step(0.01).name("metalness");
+sphereTweak.add(sphere.material, "roughness").min(0).max(1).step(0.01).name("roughness");
 
 const box = new THREE.Mesh(
   new THREE.BoxGeometry(2, 0.4, 2),
