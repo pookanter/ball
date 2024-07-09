@@ -36,7 +36,7 @@ scene.add(directionalLight);
 
 gui.add(directionalLight, "intensity").min(0).max(1).step(0.01).name("directional intensity");
 
-const hemisphereLight = new THREE.HemisphereLight(0xff0000, 0xffd700, 0.5);
+const hemisphereLight = new THREE.HemisphereLight(0xffd700, 0xfc5e03, 1);
 scene.add(hemisphereLight);
 
 // Objects
