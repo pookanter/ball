@@ -20,6 +20,10 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+// Lights
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+scene.add(ambientLight);
+
 // Objects
 const group = new THREE.Group();
 scene.add(group);
