@@ -78,6 +78,8 @@ boxTweak.add(box.position, "x").min(-3).max(3).step(0.01).name("x");
 boxTweak.add(box.position, "y").min(-3).max(3).step(0.01).name("y");
 boxTweak.add(box.position, "z").min(-3).max(3).step(0.01).name("z");
 boxTweak.addColor(box.material, "color").name("color");
+boxTweak.add(box.material, "metalness").min(0).max(1).step(0.01).name("metalness");
+boxTweak.add(box.material, "roughness").min(0).max(1).step(0.01).name("roughness");
 
 // Axes helper
 const axesHelper = new THREE.AxesHelper(100);
