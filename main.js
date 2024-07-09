@@ -21,14 +21,19 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Lights
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight();
+ambientLight.color = new THREE.Color(0xffffff);
+ambientLight.intensity = 1;
 scene.add(ambientLight);
 
-const pointLight = new THREE.PointLight(0xffffff, 0.5);
-pointLight.position.x = 2;
-pointLight.position.y = 3;
-pointLight.position.z = 4;
-scene.add(pointLight);
+gui.add(ambientLight, "intensity").min(0).max(1).step(0.01).name("ambient intensity");
+
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+directionalLight.position.x = 2;
+directionalLight.position.y = 3;
+directionalLight.position.z = 4;
+scene.add(directionalLight);
 
 // Objects
 const group = new THREE.Group();
@@ -39,8 +44,7 @@ groupTweak.add(group.position, "x").min(-3).max(3).step(0.01).name("x");
 groupTweak.add(group.position, "y").min(-3).max(3).step(0.01).name("y");
 groupTweak.add(group.position, "z").min(-3).max(3).step(0.01).name("z");
 
-const sphereMat = new THREE.MeshStandardMaterial({ map: marbleTexture, color: 0xffffff, metalness: 0.65 , roughness: 0.45 });
-
+const sphereMat = new THREE.MeshStandardMaterial({ map: marbleTexture, metalness: 0.25 , roughness: 0.25 });
 const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 32, 16),
   sphereMat
@@ -56,9 +60,10 @@ sphereTweak.addColor(sphere.material, "color").name("color");
 sphereTweak.add(sphere.material, "metalness").min(0).max(1).step(0.01).name("metalness");
 sphereTweak.add(sphere.material, "roughness").min(0).max(1).step(0.01).name("roughness");
 
+const boxMat = new THREE.MeshStandardMaterial({ map: brownWoodTexture, metalness: 0.25 , roughness: 0.75 });
 const box = new THREE.Mesh(
   new THREE.BoxGeometry(2, 0.4, 2),
-  new THREE.MeshBasicMaterial({ map: brownWoodTexture })
+  boxMat
 );
 group.add(box);
 
