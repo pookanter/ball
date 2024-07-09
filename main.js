@@ -8,7 +8,10 @@ const gui = new GUI();
 
 // Textures
 const textureLoader = new THREE.TextureLoader();
+
 const marbleTexture = textureLoader.load("/public/textures/white-marble.jpg");
+marbleTexture.minFilter = THREE.NearestFilter;
+
 const brownWoodTexture = textureLoader.load("/public/textures/brown-wood.jpg");
 
 // Canvas
