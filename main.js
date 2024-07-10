@@ -32,9 +32,19 @@ const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
 directionalLight.position.x = 2;
 directionalLight.position.y = 3;
 directionalLight.position.z = 4;
+directionalLight.castShadow = true;
+
+directionalLight.shadow.mapSize.width = 1024;
+directionalLight.shadow.mapSize.height = 1024;
+directionalLight.shadow.camera.near = 1;
+// directionalLight.shadow.camera.far = 6;
+
 scene.add(directionalLight);
 
 gui.add(directionalLight, "intensity").min(0).max(1).step(0.01).name("directional intensity");
+
+const directionalLightCameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+scene.add(directionalLightCameraHelper);
 
 const hemisphereLight = new THREE.HemisphereLight(0xfff3b0, 0x4a3126, 0.75);
 scene.add(hemisphereLight);
@@ -55,6 +65,7 @@ const sphere = new THREE.Mesh(
   new THREE.SphereGeometry(0.5, 32, 16),
   sphereMat
 );
+sphere.castShadow = true;
 group.add(sphere);
 sphere.position.y = 0.75;
 
@@ -66,11 +77,12 @@ sphereTweak.addColor(sphere.material, "color").name("color");
 sphereTweak.add(sphere.material, "metalness").min(0).max(1).step(0.01).name("metalness");
 sphereTweak.add(sphere.material, "roughness").min(0).max(1).step(0.01).name("roughness");
 
-const boxMat = new THREE.MeshStandardMaterial({ map: brownWoodTexture, metalness: 0.25 , roughness: 0.75 });
+const boxMat = new THREE.MeshStandardMaterial({ map: brownWoodTexture, metalness: 0.25 , roughness: 0.45 });
 const box = new THREE.Mesh(
   new THREE.BoxGeometry(2, 0.4, 2),
   boxMat
 );
+box.receiveShadow = true;
 group.add(box);
 
 const boxTweak = gui.addFolder("box");
@@ -110,6 +122,7 @@ const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
+renderer.shadowMap.enabled = true;
 renderer.render(scene, camera);
 gui.onChange(() => {
   renderer.render(scene, camera);
